@@ -3,10 +3,7 @@ package net.java;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.*;
 
@@ -54,8 +51,23 @@ public class StreamTest {
     }
 
     @Test
-    public void mapDouble() {
-        Map<Integer, Integer> record = oneToTen.stream()
-                .map( (k,v) -> (k, v*2));
+    public void mapToUpperCase() {
+        List<String> letters = Arrays.asList("a", "b", "c", "d", "e");
+        List<String> upper = letters.stream().map(str -> str.toUpperCase()).collect(toList());
+        assert upper.contains("A");
+        assert upper.contains("B");
+        assert upper.contains("C");
+        assert upper.contains("D");
+        assert upper.contains("E");
+    }
+
+    @Test
+    public void mapExample() {
+        Map<Integer, Integer> doubled = new HashMap<>();
+        doubled.put(1, 2);
+        doubled.put(2, 4);
+        doubled.put(3, 6);
+        doubled.put(4, 8);
+        assert 3 == doubled.compute(1, (k,v) -> k + v);
     }
 }
